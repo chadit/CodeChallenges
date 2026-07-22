@@ -18,3 +18,46 @@
 .pytest_cache
 __pycache__
 .pytest_cache
+
+# Java compiled output
+*.class
+out/
+bin/
+build/
+target/
+
+# Java packaging artifacts
+*.jar
+*.war
+*.ear
+*.nar
+
+# JVM crash logs and profiling output
+hs_err_pid*
+replay_pid*
+*.hprof
+
+# Gradle
+.gradle/
+gradle-app.setting
+
+# Maven
+.mvn/timing.properties
+release.properties
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+dependency-reduced-pom.xml
+
+# IDE project metadata
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+.eclipse/
+.metadata/
+.apt_generated/
+.factorypath
