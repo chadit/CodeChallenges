@@ -13,17 +13,12 @@ public class GradeStatistics {
 
         displayInstructions();
 
-        try {
-            double[] grades = readGrades(input);
-            double average = calculateAverage(grades);
-            double maximum = findMaximum(grades);
-            double minimum = findMinimum(grades);
+        double[] grades = readGrades(input);
+        double average = calculateAverage(grades);
+        double maximum = findMaximum(grades);
+        double minimum = findMinimum(grades);
 
-            displayResults(average, maximum, minimum);
-        } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
-        }
-
+        displayResults(average, maximum, minimum);
         input.close();
     }
 
@@ -47,8 +42,8 @@ public class GradeStatistics {
         return grades;
     }
 
-    /** Reads one valid grade. Three attempts keep bad input from causing an endless loop. */
-    private static double readGrade(Scanner input, int gradeNumber) {
+    /** Reads one grade and limits invalid input to three attempts. */
+    public static double readGrade(Scanner input, int gradeNumber) {
         for (int attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
             System.out.printf(
                     "Enter grade %d of %d: ",
@@ -56,8 +51,7 @@ public class GradeStatistics {
                     NUMBER_OF_GRADES);
 
             if (!input.hasNext()) {
-                throw new IllegalArgumentException(
-                        "Input ended before all grades were entered.");
+                break;
             }
 
             if (!input.hasNextDouble()) {
@@ -79,10 +73,11 @@ public class GradeStatistics {
                     HIGHEST_VALID_GRADE);
         }
 
-        throw new IllegalArgumentException(
-                "No valid grade entered after "
-                        + MAX_ATTEMPTS
-                        + " attempts. Exiting.");
+        System.out.printf(
+                "No valid grade entered after %d attempts. Exiting.%n",
+                MAX_ATTEMPTS);
+        System.exit(1);
+        return LOWEST_VALID_GRADE;
     }
 
     /** Checks whether a grade falls inside the accepted range. */
